@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdbTool", "DigitalnaForenzikaAdb\AdbTool.csproj", "{EA540C40-FFF4-4107-B674-83654586FF24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons", "Commons\Commons.csproj", "{A481559B-F756-4733-8E11-F7A60C1F2DD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages", "Messages\Messages.csproj", "{E8E03345-E1A1-496E-AAE2-E4F425A3D10C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts", "Contacts\Contacts.csproj", "{AFF3DAA3-B2D9-4FA9-998A-C569735B2A40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calendar", "Calendar\Calendar.csproj", "{679E05BC-AC60-48E8-8545-5F1069C06C41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem", "FileSystem\FileSystem.csproj", "{33B91485-0152-4B31-9936-ADF542BCE2CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdbCustomClient", "AdbCustomClient\AdbCustomClient.csproj", "{82D85364-08F5-4D2E-A9D0-8CFF896E625A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA540C40-FFF4-4107-B674-83654586FF24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA540C40-FFF4-4107-B674-83654586FF24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA540C40-FFF4-4107-B674-83654586FF24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA540C40-FFF4-4107-B674-83654586FF24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A481559B-F756-4733-8E11-F7A60C1F2DD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A481559B-F756-4733-8E11-F7A60C1F2DD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A481559B-F756-4733-8E11-F7A60C1F2DD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A481559B-F756-4733-8E11-F7A60C1F2DD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8E03345-E1A1-496E-AAE2-E4F425A3D10C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8E03345-E1A1-496E-AAE2-E4F425A3D10C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8E03345-E1A1-496E-AAE2-E4F425A3D10C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8E03345-E1A1-496E-AAE2-E4F425A3D10C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFF3DAA3-B2D9-4FA9-998A-C569735B2A40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFF3DAA3-B2D9-4FA9-998A-C569735B2A40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFF3DAA3-B2D9-4FA9-998A-C569735B2A40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFF3DAA3-B2D9-4FA9-998A-C569735B2A40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{679E05BC-AC60-48E8-8545-5F1069C06C41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{679E05BC-AC60-48E8-8545-5F1069C06C41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{679E05BC-AC60-48E8-8545-5F1069C06C41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{679E05BC-AC60-48E8-8545-5F1069C06C41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33B91485-0152-4B31-9936-ADF542BCE2CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33B91485-0152-4B31-9936-ADF542BCE2CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33B91485-0152-4B31-9936-ADF542BCE2CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33B91485-0152-4B31-9936-ADF542BCE2CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82D85364-08F5-4D2E-A9D0-8CFF896E625A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82D85364-08F5-4D2E-A9D0-8CFF896E625A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82D85364-08F5-4D2E-A9D0-8CFF896E625A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82D85364-08F5-4D2E-A9D0-8CFF896E625A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4CB1AB24-09C8-4585-82DD-04FB3CCD0D04}
+	EndGlobalSection
+EndGlobal
