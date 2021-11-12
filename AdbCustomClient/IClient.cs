@@ -1,5 +1,4 @@
 ﻿using Commons.DTO;
-using System.Collections.Generic;
 
 namespace AdbCustomClient
 {
@@ -17,9 +16,19 @@ namespace AdbCustomClient
         public Result ExeGetPeopleContactsCommand();
         #endregion
 
+        #region Calendar
+
         public Result ExeGetCalendarCommand();
         public Result ExeGetEventsCommand();
+        public Result ExeGetAttendeesCommand();
+
+        #endregion
+
+        #region File system
         public Result ExePullCommand(string shellPath, string savePath);
         public Result ExeGetFilesCommand(string fullpath);
+        #endregion
+
+        public Result ExeGetPhoneInfoCommand();
     }
 }

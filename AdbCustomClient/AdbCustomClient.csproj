@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -9,6 +9,7 @@
     <ProjectReference Include="..\Contacts\Contacts.csproj" />
     <ProjectReference Include="..\FileSystem\FileSystem.csproj" />
     <ProjectReference Include="..\Messages\Messages.csproj" />
+    <ProjectReference Include="..\PhoneInfo\PhoneInfo.csproj" />
   </ItemGroup>
 
 </Project>

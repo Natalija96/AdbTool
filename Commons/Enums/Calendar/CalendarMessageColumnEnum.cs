@@ -1,26 +1,28 @@
 ﻿using System.ComponentModel;
 
-namespace AdbTool.Enums.Calendar
+namespace Commons.Enums.Calendar
 {
     public enum CalendarMessageColumnEnum
     {
+        [Description("_id")]
+        Id,
 
         [Description("ownerAccount")]
-        OwnerAccount = 0,
+        OwnerAccount,
 
         [Description("calendar_displayName")]
-        CalendarDisplayName = 1,
+        CalendarDisplayName,
 
         [Description("name")]
-        Name = 2,
+        Name,
 
         [Description("account_type")]
-        AccountType = 3,
+        AccountType,
 
         [Description("visible")]
-        Visible = 4,
+        Visible,
 
         [Description("sync_events")]
-        SyncEvents = 5
+        SyncEvents
     }
 }

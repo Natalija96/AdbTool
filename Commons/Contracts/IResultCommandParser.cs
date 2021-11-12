@@ -1,6 +1,6 @@
 ﻿using Commons.DTO;
 
-namespace Commons
+namespace Commons.Contracts
 {
     public interface IResultCommandParser
     {

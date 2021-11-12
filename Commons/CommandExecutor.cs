@@ -1,4 +1,5 @@
-﻿using Commons.DTO;
+﻿using Commons.Contracts;
+using Commons.DTO;
 using SharpAdbClient;
 using System.Linq;
 

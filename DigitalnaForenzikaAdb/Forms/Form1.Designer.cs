@@ -1,5 +1,5 @@
 ﻿
-namespace DigitalnaForenzikaAdb
+namespace AdbTool
 {
     partial class Form1
     {
@@ -41,6 +41,7 @@ namespace DigitalnaForenzikaAdb
             this.panel2 = new System.Windows.Forms.Panel();
             this.headerLabel = new System.Windows.Forms.Label();
             this.data1Panel = new System.Windows.Forms.Panel();
+            this.exportPanel = new System.Windows.Forms.Panel();
             this.lbPanel = new System.Windows.Forms.Panel();
             this.btnPanel = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
@@ -48,6 +49,7 @@ namespace DigitalnaForenzikaAdb
             this.dataPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.data1Panel.SuspendLayout();
+            this.lbPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -88,6 +90,7 @@ namespace DigitalnaForenzikaAdb
             this.phoneInfoBtn.TabIndex = 12;
             this.phoneInfoBtn.Text = "Phone Info";
             this.phoneInfoBtn.UseVisualStyleBackColor = true;
+            this.phoneInfoBtn.Click += new System.EventHandler(this.phoneInfoBtn_Click);
             // 
             // contactsBtn
             // 
@@ -184,27 +187,36 @@ namespace DigitalnaForenzikaAdb
             // 
             // data1Panel
             // 
+            this.data1Panel.Controls.Add(this.exportPanel);
             this.data1Panel.Controls.Add(this.lbPanel);
             this.data1Panel.Controls.Add(this.btnPanel);
-            this.data1Panel.Location = new System.Drawing.Point(90, 216);
+            this.data1Panel.Location = new System.Drawing.Point(50, 190);
             this.data1Panel.Name = "data1Panel";
-            this.data1Panel.Size = new System.Drawing.Size(834, 514);
+            this.data1Panel.Size = new System.Drawing.Size(911, 540);
             this.data1Panel.TabIndex = 0;
+            // 
+            // exportPanel
+            // 
+            this.exportPanel.Location = new System.Drawing.Point(12, 66);
+            this.exportPanel.Name = "exportPanel";
+            this.exportPanel.Size = new System.Drawing.Size(172, 53);
+            this.exportPanel.TabIndex = 2;
             // 
             // lbPanel
             // 
             this.lbPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lbPanel.Location = new System.Drawing.Point(0, 52);
+            this.lbPanel.Location = new System.Drawing.Point(0, 125);
             this.lbPanel.Name = "lbPanel";
-            this.lbPanel.Size = new System.Drawing.Size(834, 462);
+            this.lbPanel.Size = new System.Drawing.Size(911, 415);
             this.lbPanel.TabIndex = 1;
+        
             // 
             // btnPanel
             // 
             this.btnPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnPanel.Location = new System.Drawing.Point(0, 0);
             this.btnPanel.Name = "btnPanel";
-            this.btnPanel.Size = new System.Drawing.Size(834, 58);
+            this.btnPanel.Size = new System.Drawing.Size(911, 58);
             this.btnPanel.TabIndex = 0;
             // 
             // Form1
@@ -226,6 +238,8 @@ namespace DigitalnaForenzikaAdb
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.data1Panel.ResumeLayout(false);
+            this.lbPanel.ResumeLayout(false);
+            this.lbPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -246,6 +260,7 @@ namespace DigitalnaForenzikaAdb
         private System.Windows.Forms.Panel lbPanel;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label headerLabel;
+        private System.Windows.Forms.Panel exportPanel;
     }
 }
 

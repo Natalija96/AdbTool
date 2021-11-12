@@ -1,4 +1,4 @@
-﻿namespace Commons
+﻿namespace Commons.Contracts
 {
     public interface ICommandGenerator
     {

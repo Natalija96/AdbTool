@@ -4,15 +4,16 @@ using System.Collections.Generic;
 
 namespace Commons
 {
-    public class PullCommandExecutor : ICommandExecutor
+    public class DevicesCommandExecutor : ICommandExecutor
     {
         private readonly IResultCommandParser _resultCommandParser;
         private readonly ICommandGenerator _commandGenerator;
         private readonly CustomAdbClient _adbClient;
 
-        public PullCommandExecutor(ICommandGenerator commandGenerator)
+        public DevicesCommandExecutor(ICommandGenerator commandGenerator, IResultCommandParser resultCommandParser)
         {
             _commandGenerator = commandGenerator;
+            _resultCommandParser = resultCommandParser;
             _adbClient = new CustomAdbClient(@"C:\platform-tools\adb.exe");
         }
 
@@ -27,13 +28,7 @@ namespace Commons
                 errorOutput,
                 standardOutput);
 
-            var list = new List<List<string>>();
-            list.Add(standardOutput);
-            return new Result 
-            { 
-                Header = default,
-                Rows = list
-            };
+            return _resultCommandParser.Parse(string.Join("\n",standardOutput));
         }
     }
 }

@@ -2,16 +2,16 @@
 
 namespace Commons.Enums.Contacts
 {
-    public enum ContactColumnEnum
+    public enum GroupColumnEnum
     {
         [Description("account_name")]
         AccountName = 0,
 
-        [Description("data1")]
-        Name = 1,
+        [Description("group_visible")]
+        GroupVisible = 1,
 
-        [Description("contact_account_type")]
-        ContactAccountType = 2,
+        [Description("title")]
+        Title = 2,
 
         [Description("account_type")]
         AccountType = 3,

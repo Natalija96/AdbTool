@@ -1,10 +1,16 @@
-﻿using Calendar;
+﻿using Calendar.CommandGenerators;
+using Calendar.CommandResultParsers;
 using Commons;
 using Commons.DTO;
-using Contacts;
-using FileSystem;
-using Messages;
-using System.Collections.Generic;
+using Contacts.CommandGenerators;
+using Contacts.CommandResultParsers;
+using FileSystem.CommandGenerators;
+using FileSystem.CommandResultParsers;
+using Messages.CommandGenerator;
+using Messages.CommandGenerators;
+using Messages.CommandResultParsers;
+using PhoneInfo.CommandGenerator;
+using PhoneInfo.CommandResultParsers;
 
 namespace AdbCustomClient
 {
@@ -75,8 +81,11 @@ namespace AdbCustomClient
 
         public Result ExeGetGroupsCommand()
         {
+            var result = new CommandExecutor(new GetGroupsCommandResultParser(),
+                            new GetGroupCommandGenerator())
+                            .ExeCommand();
 
-            throw new System.NotImplementedException();
+            return result;
         }
 
         public Result ExeGetPeopleContactsCommand()
@@ -88,5 +97,23 @@ namespace AdbCustomClient
         {
             throw new System.NotImplementedException();
         }
+
+        public Result ExeGetAttendeesCommand()
+        {
+            var result = new CommandExecutor(new GetAttendeesMessagesCommandResultParser(),
+                new GetAttendeesCommandGenerator())
+                .ExeCommand();
+
+            return result;
+        }
+
+        public Result ExeGetPhoneInfoCommand()
+        {
+            var result = new DevicesCommandExecutor(new GetPhoneInfoCommandGenerator(),
+                new GetPhoneInfoCommandResultParser())
+                .ExeCommand();
+
+            return result;
+        }       
     }
 }

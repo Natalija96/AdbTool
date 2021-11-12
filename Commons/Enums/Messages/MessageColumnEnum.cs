@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace AdbTool.Enums.Messages
+namespace Commons.Enums.Messages
 {
     public enum MessageColumnEnum
     {

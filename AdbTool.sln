@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystem", "FileSystem\Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdbCustomClient", "AdbCustomClient\AdbCustomClient.csproj", "{82D85364-08F5-4D2E-A9D0-8CFF896E625A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneInfo", "PhoneInfo\PhoneInfo.csproj", "{917FF92D-C841-420E-98C1-EFB412EBC9E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{82D85364-08F5-4D2E-A9D0-8CFF896E625A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82D85364-08F5-4D2E-A9D0-8CFF896E625A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82D85364-08F5-4D2E-A9D0-8CFF896E625A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{917FF92D-C841-420E-98C1-EFB412EBC9E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{917FF92D-C841-420E-98C1-EFB412EBC9E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{917FF92D-C841-420E-98C1-EFB412EBC9E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{917FF92D-C841-420E-98C1-EFB412EBC9E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

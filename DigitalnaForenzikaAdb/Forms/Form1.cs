@@ -1,24 +1,23 @@
 ﻿using AdbCustomClient;
-using AdbTool.Enums.Calendar;
-using AdbTool.Enums.Contacts;
-using AdbTool.Enums.Messages;
+using Commons.DTO;
 using DigitalnaForenzikaAdb.CustomControls;
-using DigitalnaForenzikaAdb.Enums;
-using EnumsNET;
 using SharpAdbClient;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
-namespace DigitalnaForenzikaAdb
+namespace AdbTool
 {
     public partial class Form1 : Form
     {
         private readonly IClient _client;
-        TreeView tree = new TreeView();
-        List<string> expandedNodes = new List<string>();
+        private TreeView tree = new TreeView();
+        private List<string> expandedNodes = new List<string>();
+        private Result presentedData;
 
         public Form1()
         {
@@ -32,7 +31,7 @@ namespace DigitalnaForenzikaAdb
 
             tree.AfterSelect += treeView_Click;
 
-            msgsBtn_Click(null, null);
+            phoneInfoBtn_Click(null, null);
         }
 
         #region Messages
@@ -57,6 +56,10 @@ namespace DigitalnaForenzikaAdb
             var btn3 = new FlatButton("MMS", btnPanel.Width / 3, btnPanel.Height, new Point(btn2.Width + btn1.Width, 0));
             btnPanel.Controls.Add(btn3);
 
+            var exportBtn = new FlatButton("Export", exportPanel.Width, exportPanel.Height, new Point(0, 0));
+            exportBtn.Click += ExportPresentedData_Click;
+            exportPanel.Controls.Add(exportBtn);
+
             //default
             msgSmsAllBtn_Click(null, null);
         }
@@ -64,19 +67,18 @@ namespace DigitalnaForenzikaAdb
         public void msgSmsAllBtn_Click(object sender, EventArgs e)
         {
             lbPanel.Controls.Clear();
+
             var result = _client.ExeGetAllMessagesCommand();
 
-            var columns = Enum.GetValues(typeof(MessageColumnEnum))
-               .Cast<MessageColumnEnum>()
-               .Select(e => e.AsString(EnumFormat.Description));
-
-            var lsBox = new CustomListView(lbPanel.Width, lbPanel.Height, columns.ToList());
+            var lsBox = new CustomListView(lbPanel.Width, lbPanel.Height, result.Header.ToList());
             lbPanel.Controls.Add(lsBox);
 
             foreach (var row in result.Rows)
             {
                 lsBox.Items.Add(new ListViewItem(row.ToArray()));
             }
+
+            presentedData = result;
         }
 
         public void msgSmsInboxBtn_Click(object sender, EventArgs e)
@@ -84,17 +86,15 @@ namespace DigitalnaForenzikaAdb
             lbPanel.Controls.Clear();
             var result = _client.ExeGetInboxMessagesCommand();
 
-            var columns = Enum.GetValues(typeof(MessageColumnEnum))
-              .Cast<MessageColumnEnum>()
-              .Select(e => e.AsString(EnumFormat.Description));
-
-            var lsView = new CustomListView(lbPanel.Width, lbPanel.Height, columns.ToList());
+            var lsView = new CustomListView(lbPanel.Width, lbPanel.Height, result.Header.ToList());
             lbPanel.Controls.Add(lsView);
 
             foreach (var row in result.Rows)
             {
                 lsView.Items.Add(new ListViewItem(row.ToArray()));
             }
+
+            presentedData = result;
         }
 
         #endregion
@@ -117,12 +117,16 @@ namespace DigitalnaForenzikaAdb
             btnPanel.Controls.Add(btn2);
 
             var btn3 = new FlatButton("Groups", btnPanel.Width / 4, btnPanel.Height, new Point(btn2.Width + btn1.Width, 0));
-        //    btn3.Click += contactGroupsBtn_Click;
+            btn3.Click += contactGroupsBtn_Click;
             btnPanel.Controls.Add(btn3);
 
             var btn4 = new FlatButton("Phones", btnPanel.Width / 4, btnPanel.Height, new Point(btn3.Width + btn2.Width + btn1.Width, 0));
-           // btn2.Click += contactPhonesBtn_Click;
+           // btn4.Click += contactPhonesBtn_Click;
             btnPanel.Controls.Add(btn4);
+
+            var exportBtn = new FlatButton("Export", exportPanel.Width, exportPanel.Height, new Point(0, 0));
+            exportBtn.Click += ExportPresentedData_Click;
+            exportPanel.Controls.Add(exportBtn);
 
             //default
             contanctsBtn_Click(null, null);
@@ -133,11 +137,7 @@ namespace DigitalnaForenzikaAdb
             lbPanel.Controls.Clear();
             var result = _client.ExeGetContactsCommand();
 
-            var columns = Enum.GetValues(typeof(ContactGroupColumnEnum))
-                .Cast<ContactGroupColumnEnum>()
-                .Select(e => e.AsString(EnumFormat.Description));
-
-            var lsBox = new CustomListView(lbPanel.Width, lbPanel.Height, columns.ToList());
+            var lsBox = new CustomListView(lbPanel.Width, lbPanel.Height, result.Header.ToList());
 
             lbPanel.Controls.Add(lsBox);
 
@@ -145,16 +145,42 @@ namespace DigitalnaForenzikaAdb
             {
                 lsBox.Items.Add(new ListViewItem(row.ToArray()));
             }
+
+            presentedData = result;
         }
 
         public void contactPeopleBtn_Click(object sender, EventArgs e)
         {
-            //to do
+            lbPanel.Controls.Clear();
+            var result = _client.ExeGetGroupsCommand();
+
+            var lsBox = new CustomListView(lbPanel.Width, lbPanel.Height, result.Header.ToList());
+
+            lbPanel.Controls.Add(lsBox);
+
+            foreach (var row in result.Rows)
+            {
+                lsBox.Items.Add(new ListViewItem(row.ToArray()));
+            }
+
+            presentedData = result;
         }
 
         public void contactGroupsBtn_Click(object sender, EventArgs e)
         {
-            //to do
+            lbPanel.Controls.Clear();
+            var result = _client.ExeGetGroupsCommand();
+
+            var lsBox = new CustomListView(lbPanel.Width, lbPanel.Height, result.Header.ToList());
+
+            lbPanel.Controls.Add(lsBox);
+
+            foreach (var row in result.Rows)
+            {
+                lsBox.Items.Add(new ListViewItem(row.ToArray()));
+            }
+
+            presentedData = result;
         }
 
         public void contactPhonesBtn_Click(object sender, EventArgs e)
@@ -280,6 +306,7 @@ namespace DigitalnaForenzikaAdb
 
         #endregion
 
+
         #region Calendar/Events
 
         private void calendarEventsBtn_Click(object sender, EventArgs e)
@@ -300,6 +327,15 @@ namespace DigitalnaForenzikaAdb
             btn2.Click += calendarBtn_Click;
             btnPanel.Controls.Add(btn2);
 
+            //button setup
+            var btn3 = new FlatButton("Attendees", btnPanel.Width / 3, btnPanel.Height, new Point(btn2.Width + btn1.Width, 0));
+            btn3.Click += attendeesBtn_Click;
+            btnPanel.Controls.Add(btn3);
+
+            var exportBtn = new FlatButton("Export", exportPanel.Width, exportPanel.Height, new Point(0, 0));
+            exportBtn.Click += ExportPresentedData_Click;
+            exportPanel.Controls.Add(exportBtn);
+
             //default
             eventsBtn_Click(null, null);
 
@@ -310,17 +346,15 @@ namespace DigitalnaForenzikaAdb
             lbPanel.Controls.Clear();
             var result = _client.ExeGetEventsCommand();
 
-            var columns = Enum.GetValues(typeof(EventMessageColumnEnum))
-              .Cast<EventMessageColumnEnum>()
-              .Select(e => e.AsString(EnumFormat.Description));
-
-            var lsBox = new CustomListView(lbPanel.Width, lbPanel.Height, columns.ToList());
+            var lsBox = new CustomListView(lbPanel.Width, lbPanel.Height, result.Header.ToList());
             lbPanel.Controls.Add(lsBox);
 
             foreach (var row in result.Rows)
             {
                 lsBox.Items.Add(new ListViewItem(row.ToArray()));
             }
+
+            presentedData = result;
         }
 
         public void calendarBtn_Click(object sender, EventArgs e)
@@ -328,19 +362,132 @@ namespace DigitalnaForenzikaAdb
             lbPanel.Controls.Clear();
             var result = _client.ExeGetCalendarCommand();
 
-            var columns = Enum.GetValues(typeof(CalendarMessageColumnEnum))
-              .Cast<CalendarMessageColumnEnum>()
-              .Select(e => e.AsString(EnumFormat.Description));
-
-            var lsBox = new CustomListView(lbPanel.Width, lbPanel.Height, columns.ToList());
+            var lsBox = new CustomListView(lbPanel.Width, lbPanel.Height, result.Header.ToList());
             lbPanel.Controls.Add(lsBox);
 
             foreach (var row in result.Rows)
             {
                 lsBox.Items.Add(new ListViewItem(row.ToArray()));
             }
+
+            presentedData = result;
+        }
+
+        public void attendeesBtn_Click(object sender, EventArgs e)
+        {
+            lbPanel.Controls.Clear();
+            var result = _client.ExeGetAttendeesCommand();
+
+            var lsBox = new CustomListView(lbPanel.Width, lbPanel.Height, result.Header.ToList());
+            lbPanel.Controls.Add(lsBox);
+
+            foreach (var row in result.Rows)
+            {
+                lsBox.Items.Add(new ListViewItem(row.ToArray()));
+            }
+
+            presentedData = result;
         }
 
         #endregion
+
+        public void ExportPresentedData_Click(object sender, EventArgs e)
+        {
+            var csv = new StringBuilder();
+
+            var header = string.Join(",", presentedData.Header);
+            csv.AppendLine(header);
+
+            foreach (var row in presentedData.Rows)
+            {
+                var newRows = row.Select(column => $"\"{column}\"");
+                var line = string.Join(",", newRows);
+                csv.AppendLine(line);
+            }
+
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            string selectedPath = null;
+            var sdResult = fbd.ShowDialog();
+            if (sdResult == DialogResult.OK)
+            {
+                selectedPath = fbd.SelectedPath;
+            }
+
+            if (sdResult != DialogResult.OK)
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(fbd.SelectedPath))
+            {
+                return;
+            }
+
+            var timestamp = new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds();
+            File.WriteAllText(selectedPath + "\\data" + timestamp.ToString()+".csv", csv.ToString());
+
+            MessageBox.Show("Export finished.");
+        }
+
+        private void phoneInfoBtn_Click(object sender, EventArgs e)
+        {
+            //clear controls
+            btnPanel.Controls.Clear();
+            lbPanel.Controls.Clear();
+            exportPanel.Controls.Clear();
+            var btn1 = new FlatButton("Refresh", btnPanel.Width / 3, btnPanel.Height, new Point(0, 0));
+            btn1.Click += refreshBtn_Click;
+            btnPanel.Controls.Add(btn1);
+
+            headerLabel.Text = "Phone Info";
+            var textLabel = new Label();
+
+            textLabel.AutoSize = true;
+            //textLabel.Location = new Point(102, 97);
+            textLabel.Name = "phoneValueLabel";
+            textLabel.Size = new System.Drawing.Size(0, 24);
+            textLabel.TabIndex = 14;
+
+            var valueLabel = new Label();
+
+            valueLabel.AutoSize = true;
+            valueLabel.Name = "phoneValueLabel";
+            valueLabel.Size = new System.Drawing.Size(0, 24);
+            valueLabel.TabIndex = 14;
+
+            textLabel.Location = new Point(0, 0);
+            valueLabel.Location = new Point(0, 50);
+
+            var result = _client.ExeGetPhoneInfoCommand();
+           
+            
+            lbPanel.Controls.Add(textLabel);
+            lbPanel.Controls.Add(valueLabel);
+
+            if (result == null)
+            {
+               valueLabel.Text = "Please, connect your phone, and click refresh button";
+                textLabel.Text = "Not Connected";
+                msgsBtn.Enabled = false;
+                contactsBtn.Enabled = false;
+                fsBtn.Enabled = false;
+                calendarBtn.Enabled = false;
+                return;
+            }
+
+            valueLabel.Text = result.Header.LastOrDefault();
+
+
+            textLabel.Text = "Connected";
+            msgsBtn.Enabled = true;
+            contactsBtn.Enabled = true;
+            fsBtn.Enabled = true;
+            calendarBtn.Enabled = true;
+        }
+
+        private void refreshBtn_Click(object sender, EventArgs e)
+        {
+            phoneInfoBtn_Click(null, null);
+        }
     }
 }

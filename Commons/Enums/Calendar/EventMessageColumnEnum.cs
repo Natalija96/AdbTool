@@ -1,14 +1,17 @@
 ﻿using System.ComponentModel;
 
-namespace DigitalnaForenzikaAdb.Enums
+namespace Commons.Enums.Calendar
 {
     public enum EventMessageColumnEnum
     {
+        [Description("_id")]
+        Id,
+
         [Description("eventTimezone")]
         EventTimeZone,
 
-        ////[Description("title")]
-        //Title = 1,
+        [Description("title")]
+        Title,
 
         [Description("ownerAccount")]
         OwnerAccount,
@@ -30,5 +33,8 @@ namespace DigitalnaForenzikaAdb.Enums
 
         [Description("duration")]
         Duration,
+
+        [Description("availability")]
+        Availability,
     }
 }
