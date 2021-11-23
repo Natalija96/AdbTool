@@ -25,7 +25,7 @@ namespace AdbTool
 
             _client = new Client();
             AdbServer server = new AdbServer();
-           
+
             //start server just in case
             var result = server.StartServer(@"C:\platform-tools\adb.exe", restartServerIfNewer: false);
 
@@ -41,6 +41,7 @@ namespace AdbTool
             //clear controls
             btnPanel.Controls.Clear();
             lbPanel.Controls.Clear();
+            exportPanel.Controls.Clear();
 
             headerLabel.Text = "Messages";
 
@@ -53,8 +54,8 @@ namespace AdbTool
             btn2.Click += msgSmsInboxBtn_Click;
             btnPanel.Controls.Add(btn2);
 
-            var btn3 = new FlatButton("MMS", btnPanel.Width / 3, btnPanel.Height, new Point(btn2.Width + btn1.Width, 0));
-            btnPanel.Controls.Add(btn3);
+            // var btn3 = new FlatButton("MMS", btnPanel.Width / 3, btnPanel.Height, new Point(btn2.Width + btn1.Width, 0));
+            // btnPanel.Controls.Add(btn3);
 
             var exportBtn = new FlatButton("Export", exportPanel.Width, exportPanel.Height, new Point(0, 0));
             exportBtn.Click += ExportPresentedData_Click;
@@ -105,24 +106,25 @@ namespace AdbTool
             //clear controls
             btnPanel.Controls.Clear();
             lbPanel.Controls.Clear();
+            exportPanel.Controls.Clear();
 
             headerLabel.Text = "Contacts";
 
-            var btn1 = new FlatButton("Contacts", btnPanel.Width / 4, btnPanel.Height, new Point(0,0));
+            var btn1 = new FlatButton("Contacts", btnPanel.Width / 4, btnPanel.Height, new Point(0, 0));
             btn1.Click += contanctsBtn_Click;
             btnPanel.Controls.Add(btn1);
 
-            var btn2 = new FlatButton("People", btnPanel.Width / 4, btnPanel.Height, new Point(btn1.Width, 0));
-         //   btn2.Click += contactPeopleBtn_Click;
-            btnPanel.Controls.Add(btn2);
+            //var btn2 = new FlatButton("People", btnPanel.Width / 4, btnPanel.Height, new Point(btn1.Width, 0));
+            //   btn2.Click += contactPeopleBtn_Click;
+           // btnPanel.Controls.Add(btn2);
 
-            var btn3 = new FlatButton("Groups", btnPanel.Width / 4, btnPanel.Height, new Point(btn2.Width + btn1.Width, 0));
+            var btn3 = new FlatButton("Groups", btnPanel.Width / 4, btnPanel.Height, new Point(btn1.Width, 0));
             btn3.Click += contactGroupsBtn_Click;
             btnPanel.Controls.Add(btn3);
 
-            var btn4 = new FlatButton("Phones", btnPanel.Width / 4, btnPanel.Height, new Point(btn3.Width + btn2.Width + btn1.Width, 0));
-           // btn4.Click += contactPhonesBtn_Click;
-            btnPanel.Controls.Add(btn4);
+            //var btn4 = new FlatButton("Phones", btnPanel.Width / 4, btnPanel.Height, new Point(btn3.Width + btn2.Width + btn1.Width, 0));
+            // btn4.Click += contactPhonesBtn_Click;
+            //btnPanel.Controls.Add(btn4);
 
             var exportBtn = new FlatButton("Export", exportPanel.Width, exportPanel.Height, new Point(0, 0));
             exportBtn.Click += ExportPresentedData_Click;
@@ -198,6 +200,7 @@ namespace AdbTool
             tree.Height = lbPanel.Height;
             btnPanel.Controls.Clear();
             lbPanel.Controls.Clear();
+            exportPanel.Controls.Clear();
 
             TreeNode node = new TreeNode();
 
@@ -265,14 +268,14 @@ namespace AdbTool
 
         public void RecursiveTreee(TreeNode root, int depth)
         {
-            if(depth == 0)
+            if (depth == 0)
             {
                 return;
-            }         
+            }
 
             var fullpath = root.FullPath.Replace("\\", "/");
 
-            var results =  _client.ExeGetFilesCommand(fullpath);
+            var results = _client.ExeGetFilesCommand(fullpath);
 
             if (results.Rows.FirstOrDefault().Any(result => result.Contains("Permission denied")))
             {
@@ -301,7 +304,7 @@ namespace AdbTool
                 RecursiveTreee(node, depth - 1);
             }
 
-            expandedNodes.Add(root.FullPath);         
+            expandedNodes.Add(root.FullPath);
         }
 
         #endregion
@@ -314,6 +317,7 @@ namespace AdbTool
             //clear controls
             btnPanel.Controls.Clear();
             lbPanel.Controls.Clear();
+            exportPanel.Controls.Clear();
 
             headerLabel.Text = "Calendar/Events";
 
@@ -424,7 +428,7 @@ namespace AdbTool
             }
 
             var timestamp = new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds();
-            File.WriteAllText(selectedPath + "\\data" + timestamp.ToString()+".csv", csv.ToString());
+            File.WriteAllText(selectedPath + "\\data" + timestamp.ToString() + ".csv", csv.ToString());
 
             MessageBox.Show("Export finished.");
         }
@@ -459,14 +463,14 @@ namespace AdbTool
             valueLabel.Location = new Point(0, 50);
 
             var result = _client.ExeGetPhoneInfoCommand();
-           
-            
+
+
             lbPanel.Controls.Add(textLabel);
             lbPanel.Controls.Add(valueLabel);
 
             if (result == null)
             {
-               valueLabel.Text = "Please, connect your phone, and click refresh button";
+                valueLabel.Text = "Please, connect your phone, and click refresh button";
                 textLabel.Text = "Not Connected";
                 msgsBtn.Enabled = false;
                 contactsBtn.Enabled = false;
